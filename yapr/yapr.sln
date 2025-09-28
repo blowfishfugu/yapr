@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yapr", "yapr.vcxproj", "{FDD57909-B8A8-468D-B990-19B03EE2E10B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDD57909-B8A8-468D-B990-19B03EE2E10B}.Debug|x64.ActiveCfg = Debug|x64
+		{FDD57909-B8A8-468D-B990-19B03EE2E10B}.Debug|x64.Build.0 = Debug|x64
+		{FDD57909-B8A8-468D-B990-19B03EE2E10B}.Release|x64.ActiveCfg = Release|x64
+		{FDD57909-B8A8-468D-B990-19B03EE2E10B}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A003F37-8A80-4FB1-BAAB-4792F0D47A84}
+	EndGlobalSection
+EndGlobal
