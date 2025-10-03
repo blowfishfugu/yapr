@@ -91,6 +91,7 @@
   <ItemGroup>
     <ClInclude Include="character_set.h" />
     <ClInclude Include="init_locale.h" />
+    <ClInclude Include="object_types.h" />
     <ClInclude Include="parseArgs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
