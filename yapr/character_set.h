@@ -14,20 +14,6 @@ const enum whitespace_codes : uchar{
 	SP='\x20',
 };
 
-
-constexpr static std::array<bool, maxchar> whitespaces = []() {
-	std::array<bool, maxchar> white{};
-	const std::array<uchar,6> whitecodes = {NUL,HT,LF,FF,CR,SP};
-	for (const uchar& c : whitecodes) {
-		white[c] = true;
-	}
-	return white;
-	}();
-
-constexpr bool is_whitespace(uchar c) {
-	return whitespaces[c];
-}
-
 const enum delimiter_codes : uchar {
 	LEFTPARENTHESIS='(',
 	RIGHTPARENTHESIS=')',
@@ -41,9 +27,20 @@ const enum delimiter_codes : uchar {
 	PERCENT='%',
 };
 
-constexpr static std::array<bool, maxchar> delimiters = []() {
+constexpr static const std::array<bool, maxchar> whitespaces = []() {
+	std::array<bool, maxchar> white{};
+	constexpr std::array<uchar,6> whitecodes = {NUL,HT,LF,FF,CR,SP};
+	for (const uchar& c : whitecodes) {
+		white[c] = true;
+	}
+	return white;
+	}();
+
+
+
+constexpr static const std::array<bool, maxchar> delimiters = []() {
 	std::array<bool, 255> del{};
-	const std::array<uchar, 10> delcodes = { 
+	constexpr std::array<uchar, 10> delcodes = { 
 	LEFTPARENTHESIS,RIGHTPARENTHESIS,
 	LESSTHAN,GREATERTHAN,
 	LEFTSQUARE,RIGHTSQUARE,
@@ -57,6 +54,14 @@ constexpr static std::array<bool, maxchar> delimiters = []() {
 	return del;
 	}();
 
-constexpr bool is_delimiter(char c) {
+constexpr bool is_whitespace(const uchar c) {
+	return whitespaces[c];
+}
+
+constexpr bool is_delimiter(const uchar c) {
 	return delimiters[c];
+}
+
+constexpr bool is_regular(const uchar c) {
+	return !is_whitespace(c) && !is_delimiter(c);
 }
