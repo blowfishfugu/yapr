@@ -35,17 +35,27 @@ struct ObjectName {
 	}
 };
 
+//created by "id rev obj", to "endobj"
+//or "id rev R", precreated with unknown type
+//defaults to nullopt
+//meant to hold decoded data, after applying filters,
+//pdf will come in mostly base85-encoded, 
+// maybe lz-compressed, crypted, or postscript maybe -> raw-data will stay in separate file-structure
+//unparsable stay at nullopt
 struct BaseObject{
 	using value_type = std::variant<
-		BaseObject*,
-		std::vector<BaseObject*>,
-		std::map<ObjectName, BaseObject*>,
-		bool,
-		std::int64_t,
-		double, 
-		std::string, 
+		std::nullopt_t,
+		bool, //Boolean
+		std::int64_t, //NumericInt
+		double, //NumericReal
+		std::string, //LiteralString,HexString (same type, read different)
+		std::vector<uchar>, //stream -> could be refined to startpos..endpos/or length
+		std::vector<BaseObject*>, //[] Array
+		std::map<ObjectName, BaseObject*>, //<<>> Dictionary
+		std::tuple<BaseObject*,BaseObject*>, // <<>>dict, stream..endstream
 	>;
-	value_type value{};
+	value_type value{std::nullopt};
+	
 };
 
 //true/false
@@ -92,4 +102,17 @@ struct ObjectArray : public BaseObject {
 struct DictionaryObject : public BaseObject {
 	using value_type = std::map<ObjectName, BaseObject*>;
 	DictionaryObject() : BaseObject{ value_type{} } {};
+};
+
+//subcontainer, starts on "stream\n", ends on "\nendstream"
+struct StreamEntry : public BaseObject {
+	using value_type = std::vector<uchar>; //stream -> could be refined to startpos..endpos/or length
+	StreamEntry() : BaseObject{ value_type{} } {};
+};
+
+//A stream shall consist of a dictionary followed by zero or more bytes bracketed
+//between the keywords "stream" (followed by newline) and "endstream".
+struct StreamObject : public BaseObject {
+	using value_type = std::tuple<BaseObject*, BaseObject*>;
+	StreamObject() : BaseObject{ value_type{} } {};
 };
