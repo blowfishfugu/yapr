@@ -8,12 +8,16 @@
 #include <map>
 #include <unordered_map>
 #include "parseArgs.h"
-#include "de_de.h"
+#include "init_locale.h"
+#include "character_set.h"
 
 
 int main(int argc, char* argv[]) {
-	initLocale<de_DE>();
-	auto args = parseArgs(argc, argv);
+	init_locale<de_DE>();
+	const auto args = parseArgs(argc, argv);
 
+	for (const fs::path& fn : onlyExistingPdfs(args) ){
+		std::println(std::cout, "Processing: {}", fn.string());
+	}
 	return 0;
 }

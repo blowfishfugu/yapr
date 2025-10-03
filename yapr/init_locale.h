@@ -11,12 +11,12 @@ struct de_DE{
 };
 
 template<typename localeType>
-void initLocale() {
+void init_locale() {
 	static_assert(false, "please name a locale-type");
 }
 
 template<>
-void initLocale<de_DE>(){
+void init_locale<de_DE>(){
 	SetConsoleOutputCP(1252u); //дцья
 	std::cout.imbue(de_DE::de_de);
 }

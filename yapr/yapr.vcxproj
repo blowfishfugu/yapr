@@ -89,7 +89,8 @@
     <None Include="..\readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="de_de.h" />
+    <ClInclude Include="character_set.h" />
+    <ClInclude Include="init_locale.h" />
     <ClInclude Include="parseArgs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

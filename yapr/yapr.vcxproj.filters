@@ -34,7 +34,10 @@
     <ClInclude Include="parseArgs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="de_de.h">
+    <ClInclude Include="init_locale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="character_set.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
